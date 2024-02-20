@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 public class Form1 {
-    private JPanel Registro;
+    JPanel Registro;
     private JButton ingresarButton;
     private JTextField textField1;
     private JTextField textField2;
