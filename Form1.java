@@ -73,11 +73,11 @@ public class Form1 {
             }
         });
         borrarButton.addActionListener(new ActionListener() {
-            String Nombre=textField1.getText();
-            String Materia=textField2.getText();
-            String Calif=textField3.getText();
             @Override
             public void actionPerformed(ActionEvent e) {
+                String Nombre=textField1.getText();
+                String Materia=textField2.getText();
+                String Calif=textField3.getText();
                 // Comprobar el campo con foco
                 if (CampoaBorrar.equals("Nombre")){
                     if (!Nombre.isEmpty()){
@@ -96,7 +96,6 @@ public class Form1 {
                         textField3.setText(Calif.substring(0, Calif.length()-1));
                     }
                 }
-
             }
         });
     }
