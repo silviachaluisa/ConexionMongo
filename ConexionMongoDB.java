@@ -1,17 +1,26 @@
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
 public class ConexionMongoDB {
     private String usuario;
     private String contraseña;
     private String url;
-    MongoClient mongoClient = new MongoClient("localhost", 27017);
-    public ConexionMongoDB(String usuario, String contraseña, String url) {
-        this.usuario = usuario;
-        this.contraseña = contraseña;
-        this.url = url;
+    MongoClient cliente;
+    private MongoDatabase baseDatos;
+    private MongoCollection coleccion;
+    // Constructor
+    public ConexionMongoDB(String url) {
+         cliente = MongoClients.create(url);
     }
-    public boolean getCredenciales(String user, String password, String tipoUsuario) {
-        return true;
+
+    public void getAcceso(String nombreBaseDatos, String nombreColeccion) {
+        baseDatos = cliente.getDatabase(nombreBaseDatos);
+        coleccion = baseDatos.getCollection(nombreColeccion);
     }
-    public String getTipoUsuario() {
-        return "tipoUsuario";
+    public void Insertar_documento(Document documento){
+        coleccion.insertOne(documento);
     }
 }
