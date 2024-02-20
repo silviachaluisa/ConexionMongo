@@ -14,10 +14,12 @@ public class Form1 {
     private JTextField textField3;
     private JButton borrarButton;
     private JButton actualizarButton;
+    private JTextField textField4;
     private String CampoaBorrar="";
     ConexionMongoDB mongo;
 
     public Form1() {
+
         // Asignar un nombre a los campos
         textField1.setName("Nombre");
         textField2.setName("Materia");
