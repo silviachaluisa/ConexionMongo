@@ -24,6 +24,7 @@ public class Form1 {
         textField1.setName("Nombre");
         textField2.setName("Materia");
         textField3.setName("Calificacion");
+        textField4.setName("Codigo_Unico");
 
 
         // Capturas el campo con foco
@@ -63,12 +64,25 @@ public class Form1 {
             }
         });
 
+        textField4.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                CampoaBorrar=textField4.getName();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
+
         mongo = new ConexionMongoDB("mongodb://localhost:27017");
         mongo.getAcceso("Registros", "Registros1");
         ingresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Document documento = new Document("Nombre", textField1.getText())
+                Document documento = new Document("Codigo_Unico", textField4.getText())
+                        .append("Nombre", textField1.getText())
                         .append("Materia", textField2.getText())
                         .append("Calificacion", textField3.getText());
                 mongo.Insertar_documento(documento);
@@ -80,6 +94,7 @@ public class Form1 {
                 String Nombre=textField1.getText();
                 String Materia=textField2.getText();
                 String Calif=textField3.getText();
+                String Codigo=textField4.getText();
                 // Comprobar el campo con foco
                 if (CampoaBorrar.equals("Nombre")){
                     if (!Nombre.isEmpty()){
@@ -98,6 +113,21 @@ public class Form1 {
                         textField3.setText(Calif.substring(0, Calif.length()-1));
                     }
                 }
+
+                if (CampoaBorrar.equals("Codigo_Unico")){
+                    if (!Codigo.isEmpty()){
+                        textField4.setText(Codigo.substring(0, Codigo.length()-1));
+                    }
+                }
+            }
+        });
+        actualizarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String filtro = textField4.getText();
+                String Calificacion = textField3.getText();
+
+                mongo.Actualizar_documento(filtro, Calificacion);
             }
         });
     }
