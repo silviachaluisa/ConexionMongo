@@ -23,4 +23,12 @@ public class ConexionMongoDB {
     public void Insertar_documento(Document documento){
         coleccion.insertOne(documento);
     }
+
+    public void Actualizar_documento(Document filtro, Document documento){
+        coleccion.updateOne(filtro, documento);
+    }
+
+    public void Borrar_documento(Document documento){
+        coleccion.deleteOne(documento);
+    }
 }
